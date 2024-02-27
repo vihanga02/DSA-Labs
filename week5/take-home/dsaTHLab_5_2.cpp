@@ -20,32 +20,32 @@ int twoStacks(int maxSum, vector<int> a, vector<int> b) {
     int sum = 0;
     size_t i = 0;
     size_t j = 0;
-    int count = 0;
+    size_t count = 0;
     for (i = 0; i < a.size(); i++){
         sum += a[i];
         if (sum > maxSum){
             sum -= a[i]; 
-            i--;
             break;
         }
     }
+    count = i;
 
-    for (j = 0; j < b.size(); j++){
+    for (j = 0; j < b.size() && i >= 0; j++){
         sum += b[j];
-
+        
         while (sum > maxSum && i > 0) {
-            sum -= a[i];
             i--;
+            sum -= a[i];
         } 
     
-        if (sum <= maxSum && i + j > count) {
-            count = i + j;
+        if (sum <= maxSum && i + j + 1 > count) {
+            count = i + j + 1;
         }
         if (i < 0){
             break;
         }
     }
-    return count+2;
+    return count;
 }
 
 int main()
