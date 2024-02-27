@@ -17,35 +17,52 @@ vector<string> split(const string &);
  */
 
 int twoStacks(int maxSum, vector<int> a, vector<int> b) {
-    int sum = 0;
-    size_t i = 0;
-    size_t j = 0;
-    size_t count = 0;
-    for (i = 0; i < a.size(); i++){
-        sum += a[i];
-        if (sum > maxSum){
-            sum -= a[i]; 
-            break;
-        }
-    }
-    count = i;
+   // Initialize variables
+    int sum = 0;           
+    size_t i = 0;          
+    size_t j = 0;          
+    size_t count = 0;      
 
-    for (j = 0; j < b.size() && i >= 0; j++){
-        sum += b[j];
-        
-        while (sum > maxSum && i > 0) {
-            i--;
-            sum -= a[i];
-        } 
-    
-        if (sum <= maxSum && i + j + 1 > count) {
-            count = i + j + 1;
+    // Process the first array 'a'
+    for (i = 0; i < a.size(); i++) {
+        // Add current element to the sum
+        sum += a[i];
+        // Check if sum exceeds maxSum          
+        if (sum > maxSum) {   
+            // Subtract last added element and exit
+            sum -= a[i];      
+            break;            
         }
-        if (i < 0){
+    }
+    // Update count with the index where the loop breaks
+    count = i;  
+
+    // Process the second array 'b'
+    for (j = 0; j < b.size() && i >= 0; j++) {
+        // Add current element from b to the sum
+        sum += b[j];            
+        
+        // Adjust sum if it exceeds 'maxSum'
+        while (sum > maxSum && i > 0) {
+            // Decrement index of array a
+            i--;               
+            // Subtract elements from 'a'
+            sum -= a[i];       
+        } 
+        
+        // Update 'count' if current combination is better
+        if (sum <= maxSum && i + j + 1 > count) {
+            // Update count with maximum elements
+            count = i + j + 1;  
+        }
+        
+        // Break the loop if i becomes negative
+        if (i < 0) {
             break;
         }
     }
-    return count;
+    // Return the maximum count of elements within maxSum constraint
+    return count;  
 }
 
 int main()
