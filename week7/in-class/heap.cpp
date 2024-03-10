@@ -9,11 +9,11 @@ void heapify(int arr[], int n, int root)
    int leftChildIndIex = 2*root + 1;
    int rightChildndex = 2*root + 2;
 1
-   if (leftChildIndex < n && arr[root] < arr[leftChildIndex]){
+   if (leftChildIndIex < n && arr[root] < arr[leftChildIndIex]){
       maximumValueIndex = leftChildIndIex;
    }
    
-   if (rightChildIndex < n && arr[root-1] < arr[rightChildIndex-1]){
+   if (rightChildndex < n && arr[root] < arr[rightChildndex]){
       maximumValueIndex = rightChildndex; 
    }
 
