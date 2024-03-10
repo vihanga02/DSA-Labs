@@ -35,7 +35,6 @@ void insert(vector<int> &arr, int num){
 }
 
 void remove(vector<int> &arr, int num){
-    cout << "delete" << endl;
     auto it = find(arr.begin(), arr.end(), num);
     if (it != arr.end()){
         int index = it - arr.begin();
