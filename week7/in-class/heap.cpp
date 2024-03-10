@@ -1,43 +1,50 @@
 #include <iostream>
+
 using namespace std;
-  
-// function to heapify the tree
+
 void heapify(int arr[], int n, int root)
 {
-   // build heapify  
+   // Initialize the maximum value index as the current root
    int maximumValueIndex = root;
-   int leftChildIndIex = 2*root + 1;
-   int rightChildndex = 2*root + 2;
-1
-   if (leftChildIndIex < n && arr[maximumValueIndex] < arr[leftChildIndIex]){
-      maximumValueIndex = leftChildIndIex;
+   
+   // Calculate the indices of the left and right child nodes
+   int leftChildIndex = 2 * root + 1;
+   int rightChildIndex = 2 * root + 2;
+   
+   // Update the maximum If the left child exists and its value is greater than the current maximum value
+   if (leftChildIndex < n && arr[maximumValueIndex] < arr[leftChildIndex]){
+      maximumValueIndex = leftChildIndex;
    }
    
-   if (rightChildndex < n && arr[maximumValueIndex] < arr[rightChildndex]){
-      maximumValueIndex = rightChildndex; 
+   // Update the maximum If the right child exists and its value is greater than the current maximum value,
+   if (rightChildIndex < n && arr[maximumValueIndex] < arr[rightChildIndex]){
+      maximumValueIndex = rightChildIndex; 
    }
 
+   // If the maximum value index has changed, swap the values between the parent and the maximum value index and recursively call heapify on the affected subtree
    if (maximumValueIndex != root){
       swap(arr[root], arr[maximumValueIndex]);
       heapify(arr, n, maximumValueIndex);
    }
-
 }
-  
-// implementing heap sort
+
+// This function implements the heap sort algorithm
 void heapSort(int arr[], int n)
 {
-   // build heap
+   // Build the heap by heapifying each non-leaf node from bottom to top
    for (int i = n/2-1; i >= 0; i--){
       heapify(arr,n,i);
    }
   
-   // extracting elements from heap one by one
-   for (int j = n-1; j > 0 1; j--){
-      swap(arr[0], arr[i]);
-      heapify(arr, i, 0);
+   // After each extraction, the heap size is reduced, and the heap property is restored by heapifying the remaining elements.
+   for (int j = n-1; j > 0 ; j--){
+      // Move the current root to the end of the array
+      swap(arr[0], arr[j]); 
+      // Restore the heap property in the remaining heap
+      heapify(arr, j, 0);   
    }
 }
+
   
 /* print contents of array */
 void displayArray(int arr[], int n)
